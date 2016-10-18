@@ -1,0 +1,13 @@
+[
+  '{{repeat(5, 25)}}',
+  {
+     _id: '{{objectId()}}',
+    'Name': '{{firstName()}} {{surname()}}',
+    'Technician': '{{firstName()}} {{surname()}}',
+    'Order Date': '{{date(new Date(2015, 0, 1), new Date(), "dd-mm-YY")}}',
+    'Appt. Type': '{{random("quote", "insurance", "repair", "warranty").toUpperCase()}}',
+    'Cell Number': '{{random(phone(), "Not on File")}}',
+    'Email': '{{email()}}',
+    'Order Status': '{{random("Cancelled", "In Progress", "Done")}}'
+  }
+]
