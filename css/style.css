@@ -1,0 +1,17 @@
+
+.fields-container {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+
+.fields {
+    flex: 1;
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+}
+
