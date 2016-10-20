@@ -15,3 +15,14 @@
     justify-content: space-around;
 }
 
+
+.in-progress {
+    background-color: yellow;
+}
+
+.cancelled {
+    background-color: red;
+    }
+.done {
+    background-color: green;
+}

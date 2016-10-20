@@ -1,27 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// grabs props from 
 class OrderForm extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    // this should take a string prop that tells us if it's in-progress, cancelled, in progress, etc
       render() {
-        return (
+        const { currentOrderStatus } = this.props;
+        return ( 
           <div className="order_status">
           <div className="column">
-              <select value="cancelled">
-                <option value="in-progress">In Progress</option>
-                <option value="cancelled">Cancelled</option>
-                <option value="done">Done</option>
+              <select value={currentOrderStatus}>
+                <option value="In Progress">In Progress</option>
+                <option value="Cancelled">Cancelled</option>
+                <option value="Done">Done</option>
             </select>
             </div>
           </div>
     );
   } 
 }
-
 
 class FieldsContainer extends React.Component {
       constructor(props) {
@@ -52,6 +47,13 @@ class FieldsContainer extends React.Component {
             })
         });
         }
+        this.checkStatus = (key) => {
+          // returns class names
+          // bracket notation for clarity
+         if (this.state.orderStatus[key] === "Cancelled") return 'cancelled';
+         if (this.state.orderStatus[key] === "In Progress") return 'in-progress';
+         if (this.state.orderStatus[key] === "Done") return 'done';
+        }
     }
    
     render() {
@@ -67,37 +69,37 @@ class FieldsContainer extends React.Component {
         <div className="fields">
           <div className="column">
             <h2>Name</h2>
-          { name.map((el, ind) => <h4 key={ind}>{el}</h4>) }
+          { name.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
           </div>
           <div className="column">
             <h2>Technician</h2>
-            { technician.map((el, ind) => <h4 key={ind}>{el}</h4>) }
+            { technician.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
            </div>
           <div className="column">
               <h2>Order Date</h2>
-            { orderDate.map((el, ind) => <h4 key={ind}>{el}</h4>) }
+            { orderDate.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
           </div>
             <div className="column">
-              <h2>Appt. Type</h2>
-               { apptType.map((el, ind) => <h4 key={ind}>{el}</h4>) }
+            <h2>Appt. Type</h2>             
+            { apptType.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
             </div>
             <div className="column">
                 <h2>Cell Number</h2>
-                { cellNumber.map((el, ind) => <h4 key={ind}>{el}</h4>) }
+                { cellNumber.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
             </div>
-          <div className="column">
+            <div className="column">
                 <h2>Email</h2>
-              { email.map((el, ind) => <h4 key={ind}>{el}</h4>) }
-                
-          </div>
+              { email.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }  
+            </div>
              <div className="column">
                 <h2>Order Status</h2>
               { orderStatus.map((el, ind) => {
                 return (
-                  <h4 key={ind}> 
-                    <OrderForm orderStatus={el} />
+                  <h4 key={ind} className={this.checkStatus(ind)}> 
+                    <OrderForm currentOrderStatus={el} />
                   </h4>)
-              })}
+              })
+             }
             </div>
         </div>
        
