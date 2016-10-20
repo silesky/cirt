@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 
 class OrderForm extends React.Component {
       render() {
-        const { currentOrderStatus } = this.props;
+        const { currentOrderStatus, updateStatus } = this.props;
         return ( 
           <div className="order_status">
           <div className="column">
-              <select value={currentOrderStatus}>
+              {/* set default value */}
+              <select onChange={updateStatus} value={
+                currentOrderStatus === "In Progress" || "Done" || "Cancelled"
+                  ? currentOrderStatus 
+                  : 'In Progress'
+              }>
                 <option value="In Progress">In Progress</option>
                 <option value="Cancelled">Cancelled</option>
                 <option value="Done">Done</option>
@@ -16,6 +21,13 @@ class OrderForm extends React.Component {
           </div>
     );
   } 
+}
+OrderForm.defaultProps = {
+  currentOrderStatus: ''
+}
+OrderForm.propTypes = {
+  currentOrderStatus: React.PropTypes.string,
+  updateStatus: React.PropTypes.func,
 }
 
 class FieldsContainer extends React.Component {
@@ -49,12 +61,26 @@ class FieldsContainer extends React.Component {
         }
         this.checkStatus = (key) => {
           // returns class names
-          // bracket notation for clarity
-         if (this.state.orderStatus[key] === "Cancelled") return 'cancelled';
-         if (this.state.orderStatus[key] === "In Progress") return 'in-progress';
-         if (this.state.orderStatus[key] === "Done") return 'done';
+          switch (this.state.orderStatus[key]) {
+            case 'Cancelled':
+              return 'cancelled'
+            case 'In Progress':
+              return 'in-progress'
+            case 'Done':
+              return 'done'
+            default:
+              break;
+            }
         }
-    }
+        this.updateStatus = (key, event) => {
+          // key is also the index of the current value
+          const newStatus = event.target.value;
+          // copy, don't mutate
+          const freshCopy = this.state.orderStatus.slice(0)
+          freshCopy[key] = newStatus;
+          this.setState({orderStatus: freshCopy});
+          }
+      }
    
     render() {
      const { 
@@ -96,7 +122,8 @@ class FieldsContainer extends React.Component {
               { orderStatus.map((el, ind) => {
                 return (
                   <h4 key={ind} className={this.checkStatus(ind)}> 
-                    <OrderForm currentOrderStatus={el} />
+                     {/* prepend the current index to the arguments */}
+                    <OrderForm updateStatus={this.updateStatus.bind(this, ind)} currentOrderStatus={el} />
                   </h4>)
               })
              }
