@@ -93,38 +93,43 @@ class FieldsContainer extends React.Component {
       orderStatus } = this.state;
     return (
         <div className="fields">
+           {/* for clarity: when dealing with repetitive elements,
+            * I prefer to break convention and keep things on one line...
+            * preserving the implicit return. 
+            */}
           <div className="column">
             <h2>Name</h2>
-          { name.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
+            { name.map((el, ind) => <div className={`field-container ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
           </div>
           <div className="column">
             <h2>Technician</h2>
-            { technician.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
+            { technician.map((el, ind) => <div className={`field-container ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
            </div>
           <div className="column">
-              <h2>Order Date</h2>
-            { orderDate.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
+            <h2>Order Date</h2>
+            { orderDate.map((el, ind) => <div className={`field-container ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
           </div>
             <div className="column">
-            <h2>Appt. Type</h2>             
-            { apptType.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
+              <h2>Appt. Type</h2>             
+              { apptType.map((el, ind) => <div className={`field-container ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
             </div>
             <div className="column">
-                <h2>Cell Number</h2>
-                { cellNumber.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }
+              <h2>Cell Number</h2>
+              { cellNumber.map((el, ind) => <div className={`field-container ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
             </div>
             <div className="column">
-                <h2>Email</h2>
-              { email.map((el, ind) => <h4 className={this.checkStatus(ind)} key={ind}>{el}</h4>) }  
+              <h2>Email</h2>
+              { email.map((el, ind) => <div className={`field-container ${this.checkStatus(ind)}`} key={ind}><h4>{ el}</h4></div>) }  
             </div>
-             <div className="column">
+              <div className="column">
                 <h2>Order Status</h2>
-              { orderStatus.map((el, ind) => {
-                return (
-                  <h4 key={ind} className={this.checkStatus(ind)}> 
-                     {/* prepend the current index to the arguments */}
-                    <OrderForm updateStatus={this.updateStatus.bind(this, ind)} currentOrderStatus={el} />
-                  </h4>)
+                { orderStatus.map((el, ind) => {
+                  return (
+                    <div className={`field-container ${this.checkStatus(ind)}`} key={ind}>
+                      <h4>  {/* prepend the current index to the arguments */}
+                        <OrderForm updateStatus={this.updateStatus.bind(this, ind)} currentOrderStatus={el} />
+                      </h4> 
+                </div>)
               })
              }
             </div>

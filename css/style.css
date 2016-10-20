@@ -12,7 +12,7 @@
     flex: 1;
     display: flex;
     margin: auto;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 
@@ -22,7 +22,13 @@
 
 .cancelled {
     background-color: red;
-    }
+}
 .done {
     background-color: green;
+}
+
+.field-container {
+    width: 100%;
+    line-height: 3em;
+    padding: 0 2px;
 }
