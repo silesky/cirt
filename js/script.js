@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
-
 // grabs props from 
 class OrderForm extends React.Component {
     constructor(props) {
@@ -11,7 +9,7 @@ class OrderForm extends React.Component {
     // this should take a string prop that tells us if it's in-progress, cancelled, in progress, etc
       render() {
         return (
-          <div>
+          <div className="order_status">
           <div className="column">
               <select value="cancelled">
                 <option value="in-progress">In Progress</option>
@@ -44,10 +42,9 @@ class FieldsContainer extends React.Component {
         this.componentWillMount = () => {
           this.getData().then(res => {
             res.map(el => {
-              // store this in the state
               this.setState( {name: [...this.state.name, el['Name']] } );
               this.setState( {technician: [...this.state.technician, el['Technician']]} );
-              this.setState( {orderDate: [...this.state.technician, el['Order Date']]} );
+              this.setState( {orderDate: [...this.state.orderDate, el['Order Date']]} );
               this.setState( {apptType: [...this.state.apptType, el['Appt. Type']] });
               this.setState( {cellNumber: [...this.state.cellNumber, el['Cell Number']] });
               this.setState( {email: [...this.state.email, el['Email']] });
@@ -55,49 +52,55 @@ class FieldsContainer extends React.Component {
             })
         });
         }
-        this.componentDidMount = () => console.log(this.state);
-
-     
     }
    
-
-
-    // ajax request goes here
-    // state.map((el) => el.date etc
-    // state.map((el) => el.name etc
     render() {
-
-
-
-console.log(this.state);
+     const { 
+      name, 
+      technician, 
+      orderDate, 
+      apptType, 
+      cellNumber, 
+      email, 
+      orderStatus } = this.state;
     return (
-      
         <div className="fields">
+          <div className="column">
+            <h2>Name</h2>
+          { name.map((el, ind) => <h4 key={ind}>{el}</h4>) }
+          </div>
+          <div className="column">
+            <h2>Technician</h2>
+            { technician.map((el, ind) => <h4 key={ind}>{el}</h4>) }
+           </div>
+          <div className="column">
+              <h2>Order Date</h2>
+            { orderDate.map((el, ind) => <h4 key={ind}>{el}</h4>) }
+          </div>
             <div className="column">
-                <h2>Name</h2>
-            </div>
-            <div className="column">
-                <h2>Technician</h2>
-            </div>
-            <div className="column">
-                <h2>Order Date</h2>
-            </div>
-            <div className="column">
-                <h2>Appt. Type</h2>
+              <h2>Appt. Type</h2>
+               { apptType.map((el, ind) => <h4 key={ind}>{el}</h4>) }
             </div>
             <div className="column">
                 <h2>Cell Number</h2>
+                { cellNumber.map((el, ind) => <h4 key={ind}>{el}</h4>) }
             </div>
-            <div className="column">
+          <div className="column">
                 <h2>Email</h2>
-                <h4>email</h4>
+              { email.map((el, ind) => <h4 key={ind}>{el}</h4>) }
                 
-                </div>
+          </div>
              <div className="column">
                 <h2>Order Status</h2>
-                <OrderForm />
+              { orderStatus.map((el, ind) => {
+                return (
+                  <h4 key={ind}> 
+                    <OrderForm orderStatus={el} />
+                  </h4>)
+              })}
             </div>
         </div>
+       
     );
     }
 }
