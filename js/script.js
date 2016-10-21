@@ -26,9 +26,11 @@ OrderForm.defaultProps = {
   currentOrderStatus: ''
 }
 OrderForm.propTypes = {
-  currentOrderStatus: React.PropTypes.string,
+  currentOrderStatus: React.PropTypes.oneOf(['In Progress', 'Done', 'Cancelled']),
   updateStatus: React.PropTypes.func,
 }
+
+
 
 class FieldsContainer extends React.Component {
       constructor(props) {
@@ -41,6 +43,8 @@ class FieldsContainer extends React.Component {
           cellNumber: [],
           email: [],
           orderStatus: [],
+          // search form
+          hidden: [],
         };
         this.getData = () => {
           return fetch('data/data.json')
@@ -79,8 +83,22 @@ class FieldsContainer extends React.Component {
           const freshCopy = this.state.orderStatus.slice(0)
           freshCopy[key] = newStatus;
           this.setState({orderStatus: freshCopy});
-          }
+        }
+
+        
+        this.checkHidden = (key) => {
+          // returns class name
+          const isHidden = this.state.hidden.find(el => el === key);
+          if (isHidden) return 'hide';
+        }
+        this.updateHidden = (event) => {
+          const searchTerm = event.target.value;
+          // returns an array of hidden items... basically, everything that's not in the search results is going to be here
+
+          // need an array of matches, which I will then search
+        }
       }
+      
    
     render() {
      const { 
@@ -92,6 +110,14 @@ class FieldsContainer extends React.Component {
       email, 
       orderStatus } = this.state;
     return (
+      <div>
+        <div className="top_bar">
+          <div className="search_bar">
+            <form>
+              <input type="text" onChange={this.updateHidden} placeholder="Search..." />
+            </form>
+          </div>
+        </div>
         <div className="fields">
            {/* for clarity: when dealing with repetitive elements,
             * I prefer to break convention and keep things on one line...
@@ -125,7 +151,7 @@ class FieldsContainer extends React.Component {
                 <h2>Order Status</h2>
                 { orderStatus.map((el, ind) => {
                   return (
-                    <div className={`field-container ${this.checkStatus(ind)}`} key={ind}>
+                    <div className={`field-container ${this.checkHidden(ind)} ${this.checkStatus(ind)}`} key={ind}>
                       <h4>  {/* prepend the current index to the arguments */}
                         <OrderForm updateStatus={this.updateStatus.bind(this, ind)} currentOrderStatus={el} />
                       </h4> 
@@ -133,6 +159,7 @@ class FieldsContainer extends React.Component {
               })
              }
             </div>
+        </div>
         </div>
        
     );

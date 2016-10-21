@@ -32,3 +32,20 @@
     line-height: 3em;
     padding: 0 2px;
 }
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}
+
+.top_bar {
+    border-bottom: 3px solid grey;
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+}
+.search_bar {
+    
+    
+}
