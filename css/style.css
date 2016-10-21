@@ -1,4 +1,8 @@
 
+
+body {
+   font-family: 'Abel', sans-serif;
+}
 .fields-container {
     display: flex;
     flex: 1;
@@ -15,16 +19,21 @@
     justify-content: center;
 }
 
+h4:nth-child(even) {
+    background-color: green;
+    }
+
 
 .in-progress {
-    background-color: yellow;
+    /* none */
 }
 
 .cancelled {
-    background-color: red;
+    background-color: #fee0e0;
 }
 .done {
-    background-color: green;
+    opacity: 0.5;
+
 }
 
 .field-container {
@@ -32,13 +41,16 @@
     line-height: 3em;
     padding: 0 2px;
 }
-.hide {
+.hidden {
     display: none;
 }
-.show {
+.visible {
     display: block;
 }
 
+h4 {
+    background-color: 
+}
 .top_bar {
     border-bottom: 3px solid grey;
     display: flex;
@@ -46,6 +58,6 @@
     padding: 2%;
 }
 .search_bar {
-    
-    
+
+
 }
