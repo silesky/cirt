@@ -19,7 +19,6 @@ System.config({
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "core-js": "npm:core-js@1.2.7",
-    "fuzzy": "npm:fuzzy@0.1.3",
     "live-server": "npm:live-server@1.1.0",
     "lodash": "npm:lodash@4.16.4",
     "react": "npm:react@15.3.2",

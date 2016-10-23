@@ -1,7 +1,6 @@
 import React from 'react'; import ReactDOM from 'react-dom';
 import { range } from 'lodash';
-import * as fuzzy from 'fuzzy';
-
+import { searchObj } from '../util';
 
 class OrderForm extends React.Component {
       render() {
@@ -60,7 +59,6 @@ class FieldsContainer extends React.Component {
               this.setState( {cellNumber: [...this.state.cellNumber, el['Cell Number']] });
               this.setState( {email: [...this.state.email, el['Email']] });
               this.setState( {orderStatus: [...this.state.orderStatus, el['Order Status']] });
-              console.info('saving to visible:', index);
               this.setState( {visible: [...this.state.visible, index] });
             })
         });
@@ -98,9 +96,7 @@ this.componentDidMount = () => console.log('visible should have indexes 0-13', t
          *  returns an array of indexes (each index is a match).
          */
         this.updateVisible = ({ target: {value} }) => {
-          console.log(this.state.name);
-          const matchArr = fuzzy.filter(value, this.state.name).map(el => el.index);
-             // so blank form doesn't do false alarms.
+          const matchArr = searchObj(value, this.state);
              if (matchArr.length) {
               this.setState({visible: matchArr});
             } else {
