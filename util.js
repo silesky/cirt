@@ -2,11 +2,11 @@
 import { uniq } from 'lodash';
 
 export const searchArr = (term, arr) => {
-  // term should modify the regex
-  const re = new RegExp(`($|^|\b)${term}`,  'i');
+  // term should modify the regex. 
+  // gotcha: need to (double) escape the backslash since it's in a string.
+  const re = new RegExp(`\\b${term}`,  'i');
   const indexMatches = arr.map((el, index) => {
     const str = el.toString();
-    console.log("str is: ", typeof str);
       if (str.match(re)) return index
       return false;
   })
