@@ -37,8 +37,8 @@ OrderForm.propTypes = {
   updateStatus: React.PropTypes.func,
 }
 class FieldsContainer extends React.Component {
-      constructor(props) {
-        super(props);
+      constructor() {
+        super();
         this.state = {
           name: [],
           technician: [],
@@ -70,7 +70,6 @@ class FieldsContainer extends React.Component {
 
         }
 
-this.componentDidMount = () => console.log('visible should have indexes 0-13', this.state.visible);
         // returns class names.
         this.checkStatus = (key) => {
           switch (this.state.orderStatus[key]) {
