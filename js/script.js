@@ -122,9 +122,19 @@ this.componentDidMount = () => console.log('visible should have indexes 0-13', t
               email,
               orderStatus } = this.state;
 
-        const getClasses= (ind) => {
+        const getClasses = (ind) => {
             const addStriping = (ind) => (ind % 2 === 0) ? 'even' : 'odd';
-            return `field-container ${this.checkVisible(ind)} ${this.checkStatus(ind)} ${addStriping(ind)} `
+            return `field-container ${addStriping(ind)} ${this.checkVisible(ind)} ${this.checkStatus(ind)}`
+        }
+        const getStatusIcons = (el) => {
+            switch (el) {
+                case 'Cancelled':
+                    return 'fa fa-times';
+                case 'Done':
+                    return 'fa fa-check'
+                case 'In Progress':
+                    return 'fa fa-spinner';
+            }
         }
         return (
             <div>
@@ -148,6 +158,19 @@ this.componentDidMount = () => console.log('visible should have indexes 0-13', t
                 * I prefer to break convention and keep things on one line...
                 * preserving the implicit return.
                 */}
+                <div className="column">
+                <h2>&nbsp;</h2>
+                { orderStatus.map((el, ind) => {
+                return ( <div 
+                    className={getClasses(ind)} 
+                    key={ind}>
+                        <h4>
+                            <i className={getStatusIcons(el)}></i>
+                        </h4>
+                    </div>
+                    ) } 
+                )}
+                </div>
               <div className="column">
                 <h2>Name</h2>
                 { name.map((el, ind) => <div className={getClasses(ind)} key={ind}><h4>{el}</h4></div>) }
