@@ -1,7 +1,7 @@
 import React from 'react'; 
 import ReactDOM from 'react-dom';
 import { range } from 'lodash';
-import { searchObj } from '../util';
+import { searchObj } from './util';
 
 
 class OrderForm extends React.Component {

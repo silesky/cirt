@@ -1,4 +1,3 @@
-
 import { uniq } from 'lodash';
 
 export const searchArr = (term, arr) => {
