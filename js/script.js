@@ -109,67 +109,72 @@ this.componentDidMount = () => console.log('visible should have indexes 0-13', t
 
         }
 
-    render() {
-     const {
-      name,
-      technician,
-      orderDate,
-      apptType,
-      cellNumber,
-      email,
-      orderStatus } = this.state;
-    return (
-      <div>
-        <div className="top_bar">
-          <div className="search_bar">
-            <form>
-              <input type="text" onChange={this.updateVisible.bind(this)} placeholder="Search..." />
-            </form>
-          </div>
-        </div>
-        <div className="fields">
-           {/* for clarity: when dealing with repetitive elements,
-            * I prefer to break convention and keep things on one line...
-            * preserving the implicit return.
-            */}
-          <div className="column">
-            <h2>Name</h2>
-            { name.map((el, ind) => <div className={`field-container ${this.checkVisible(ind)} ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
-          </div>
-          <div className="column">
-            <h2>Technician</h2>
-            { technician.map((el, ind) => <div className={`field-container ${this.checkVisible(ind)} ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
-           </div>
-          <div className="column">
-            <h2>Order Date</h2>
-            { orderDate.map((el, ind) => <div className={`field-container ${this.checkVisible(ind)} ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
-          </div>
-            <div className="column">
-              <h2>Appt. Type</h2>
-              { apptType.map((el, ind) => <div className={`field-container  ${this.checkVisible(ind)} ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
+        render() {
+           const {
+              name,
+              technician,
+              orderDate,
+              apptType,
+              cellNumber,
+              email,
+              orderStatus } = this.state;
+
+        const getClasses= (ind) => {
+            const addStriping = (ind) => (ind % 2 === 0) ? 'even' : 'odd';
+            return `field-container ${addStriping(ind)} ${this.checkVisible(ind)} ${this.checkStatus(ind)}`
+        }
+        return (
+          <div>
+            <div className="top_bar">
+              <div className="search_bar">
+                <form>
+                  <input type="text" onChange={this.updateVisible.bind(this)} placeholder="Search..." />
+                </form>
+              </div>
             </div>
-            <div className="column">
-              <h2>Cell Number</h2>
-              { cellNumber.map((el, ind) => <div className={`field-container ${this.checkVisible(ind)} ${this.checkStatus(ind)}`} key={ind}><h4>{el}</h4></div>) }
-            </div>
-            <div className="column">
-              <h2>Email</h2>
-              { email.map((el, ind) => <div className={`field-container ${this.checkVisible(ind)} ${this.checkStatus(ind)}`} key={ind}><h4>{ el}</h4></div>) }
-            </div>
+            <div className="fields">
+               {/* for clarity: when dealing with repetitive elements,
+                * I prefer to break convention and keep things on one line...
+                * preserving the implicit return.
+                */}
               <div className="column">
-                <h2>Order Status</h2>
-                { orderStatus.map((el, ind) => {
-                  return (
-                    <div className={`field-container ${this.checkVisible(ind)} ${this.checkStatus(ind)}`} key={ind}>
-                      <h4>  {/* prepend the current index to the arguments */}
-                        <OrderForm updateStatus={this.updateStatus.bind(this, ind)} currentOrderStatus={el} />
-                      </h4>
-                </div>)
-              })
-             }
+                <h2>Name</h2>
+                { name.map((el, ind) => <div className={getClasses(ind)} key={ind}><h4>{el}</h4></div>) }
+              </div>
+              <div className="column">
+                <h2>Technician</h2>
+                { technician.map((el, ind) => <div className={getClasses(ind)} key={ind}><h4>{el}</h4></div>) }
+               </div>
+              <div className="column">
+                <h2>Order Date</h2>
+                { orderDate.map((el, ind) => <div className={getClasses(ind)} key={ind}><h4>{el}</h4></div>) }
+              </div>
+                <div className="column">
+                  <h2>Appt. Type</h2>
+                  { apptType.map((el, ind) => <div className={getClasses(ind)} key={ind}><h4>{el}</h4></div>) }
+                </div>
+                <div className="column">
+                  <h2>Cell Number</h2>
+                  { cellNumber.map((el, ind) => <div className={getClasses(ind)} key={ind}><h4>{el}</h4></div>) }
+                </div>
+                <div className="column">
+                  <h2>Email</h2>
+                  { email.map((el, ind) => <div className={getClasses(ind)} key={ind}><h4>{ el}</h4></div>) }
+                </div>
+                  <div className="column">
+                    <h2>Order Status</h2>
+                    { orderStatus.map((el, ind) => {
+                      return (
+                        <div className={getClasses(ind)} key={ind}>
+                          <h4>  {/* prepend the current index to the arguments */}
+                            <OrderForm updateStatus={this.updateStatus.bind(this, ind)} currentOrderStatus={el} />
+                          </h4>
+                    </div>)
+                  })
+                 }
+                </div>
             </div>
-        </div>
-        </div>
+            </div>
 
     );
     }

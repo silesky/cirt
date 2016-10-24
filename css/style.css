@@ -1,8 +1,7 @@
-
-
 body {
-   font-family: 'Abel', sans-serif;
+    font-family: 'Abel', sans-serif;
 }
+
 .fields-container {
     display: flex;
     flex: 1;
@@ -10,7 +9,6 @@ body {
     align-items: center;
     width: 100%;
 }
-
 
 .fields {
     flex: 1;
@@ -22,13 +20,18 @@ body {
 .fields h2 {
     padding: 5px 10px;
 }
+
 .fields h4 {
     padding: 0 5px;
 }
+
 h4:nth-child(even) {
     background-color: green;
-    }
+}
 
+.even {
+    background-color: #f8f3e8;
+}
 
 .in-progress {
     /* none */
@@ -37,9 +40,9 @@ h4:nth-child(even) {
 .cancelled {
     background-color: #fee0e0;
 }
+
 .done {
     opacity: 0.5;
-
 }
 
 .field-container {
@@ -47,23 +50,24 @@ h4:nth-child(even) {
     line-height: 3em;
     padding: 0 2px;
 }
+
 .hidden {
     display: none;
 }
+
 .visible {
     display: block;
 }
 
 h4 {
-    background-color: 
+    background-color:
 }
+
 .top_bar {
     border-bottom: 3px solid grey;
     display: flex;
     justify-content: center;
     padding: 2%;
 }
-.search_bar {
 
-
-}
+.search_bar {}
