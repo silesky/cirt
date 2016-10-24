@@ -1,3 +1,17 @@
+/*
+    /* golden brown for topbar-top 
+    background-color: #e4ac66;
+    /* dark brown for topbar-bottom 
+    background-color: #512310;
+    /* beige default striping even 
+    background-color: #f8f3e8; 
+    /* pink/red for cancelled 
+    background-color: #fee0e0;
+    /*  grey dark striping  - done  
+    background-color: #e4e4e4;
+    /* grey light striping - done 
+    background-color: #f2f2f2;
+*/
 body {
     font-family: 'Abel', sans-serif;
 }
@@ -18,33 +32,40 @@ body {
 }
 
 .fields h2 {
-    padding: 5px 10px;
+    padding: 5px 3vw;
+    background-color: #512310;
+    color: white;
 }
 
 .fields h4 {
     padding: 0 5px;
+    text-align: center;
+    
 }
 
 h4:nth-child(even) {
     background-color: green;
 }
 
+
+
+.in-progress {
+    background-color: white;
+}
+
 .even {
     background-color: #f8f3e8;
 }
-
-.in-progress {
-    /* none */
+.done {
+    background-color: white;
+    color: lightgrey;
 }
-
 .cancelled {
     background-color: #fee0e0;
 }
-
-.done {
-    opacity: 0.5;
+.cancelled-select-border{
+    border: 2px solid #FF5C55;
 }
-
 .field-container {
     width: 100%;
     line-height: 3em;
@@ -64,10 +85,47 @@ h4 {
 }
 
 .top_bar {
-    border-bottom: 3px solid grey;
+    border-bottom: 1px solid white;
     display: flex;
     justify-content: center;
-    padding: 2%;
+    padding: 5px 1px;
+    background-color: #e4ac66;
+    align-items: center;
+
 }
 
-.search_bar {}
+.top_bar img {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+.top_bar--left {
+     flex: 3;
+     display: flex;
+     justify-content: space-around;
+     text-align: center;
+}
+.top_bar--middle {
+    flex: 10;
+    text-align: center;
+}
+.top_bar--right {
+    flex: 3;
+    text-align: center;
+ }
+.search_bar input {
+     width: 100%;
+     height: 30px; /* same as img*/
+     font-size: 1.25rem;
+     border-radius: 25px;
+     padding: 0 15px;
+     /* get rid of default focus effect */
+     outline: unset;
+
+}
+.column:last-child h2 {
+   border-top-right-radius: 15px;
+}
+.column:first-child h2 {
+   border-top-left-radius: 15px;
+}

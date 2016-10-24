@@ -11,7 +11,10 @@ class OrderForm extends React.Component {
           <div className="order_status">
           <div className="column">
               {/* set default value */}
-              <select onChange={updateStatus} value={
+              <select 
+              className={currentOrderStatus === 'Cancelled' ? 'cancelled-select-border' : undefined} 
+              onChange={updateStatus} 
+              value={
                 currentOrderStatus === 'In Progress' || 'Done' || 'Cancelled'
                   ? currentOrderStatus
                   : 'In Progress'
@@ -121,17 +124,25 @@ this.componentDidMount = () => console.log('visible should have indexes 0-13', t
 
         const getClasses= (ind) => {
             const addStriping = (ind) => (ind % 2 === 0) ? 'even' : 'odd';
-            return `field-container ${addStriping(ind)} ${this.checkVisible(ind)} ${this.checkStatus(ind)}`
+            return `field-container ${this.checkVisible(ind)} ${this.checkStatus(ind)} ${addStriping(ind)} `
         }
         return (
-          <div>
-            <div className="top_bar">
-              <div className="search_bar">
-                <form>
-                  <input type="text" onChange={this.updateVisible.bind(this)} placeholder="Search..." />
-                </form>
-              </div>
-            </div>
+            <div>
+                <div className="top_bar">
+                    <div className="top_bar--left"> 
+                        <img src="img/Home.png" />
+                        <img src="img/Inbox.png" />
+                        <img src="img/Calendar.png" />
+                    </div>
+                    <div className="top_bar--middle">
+                        <form className="search_bar">
+                            <input type="text" onChange={this.updateVisible.bind(this)} placeholder="Search..." />
+                        </form>
+                    </div>
+                    <div className="top_bar--right">
+                        <img src="img/Profile.png" />
+                    </div>
+                </div>
             <div className="fields">
                {/* for clarity: when dealing with repetitive elements,
                 * I prefer to break convention and keep things on one line...
