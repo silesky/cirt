@@ -7,7 +7,7 @@
     background-color: #f8f3e8; 
     /* pink/red for cancelled 
     background-color: #fee0e0;
-    /*  grey dark striping  - done  
+    /*  grey dark striping even  - done  
     background-color: #e4e4e4;
     /* grey light striping - done 
     background-color: #f2f2f2;
@@ -58,14 +58,27 @@ h4:nth-child(even) {
 }
 .done {
     background-color: white;
+   
+
+}
+.even.visible.done {    
+    background-color: #e4e4e4;
+    color: lightgrey;
+}
+
+.odd.visible.done {    
+    background-color: #f2f2f2;
     color: lightgrey;
 }
 .cancelled {
     background-color: #fee0e0;
 }
 .cancelled-select-border{
-    border: 2px solid #FF5C55;
+    border: 3px solid #FF5C55;
 }
+select {
+      outline: unset;
+    }
 .field-container {
     width: 100%;
     line-height: 3em;

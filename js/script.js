@@ -54,6 +54,17 @@ class FieldsContainer extends React.Component {
           return fetch('data/data.json')
             .then(response => response.json())
         }
+        this.sortByDone = (arr) => arr.sort((a) => (a === 'Done') ? -1 : 1);
+        this.sortStateByDone = (state = this.state) => {
+          for (let k in state) {
+            let newArr = [];
+            if (Array.isArray(state[k])) {
+              newArr = this.sortByDone(state[k]);    
+            }
+            this.setState({[k]: newArr});
+          }
+        }
+        
         this.componentWillMount = () => {
           this.getData().then(res => {
             res.map((el, index) => {
@@ -63,11 +74,11 @@ class FieldsContainer extends React.Component {
               this.setState( {apptType: [...this.state.apptType, el['Appt. Type']] });
               this.setState( {cellNumber: [...this.state.cellNumber, el['Cell Number']] });
               this.setState( {email: [...this.state.email, el['Email']] });
-              this.setState( {orderStatus: [...this.state.orderStatus, el['Order Status']] });
+              this.setState( {orderStatus: [...this.state.orderStatus, el['Order Status']] }),
               this.setState( {visible: [...this.state.visible, index] });
             })
+         this.sortStateByDone();
         });
-
         }
 
         // returns class names.
@@ -83,13 +94,12 @@ class FieldsContainer extends React.Component {
               break;
             }
         }
-        this.updateStatus = (key, event) => {
-          // key is also the index of the current value.
-          const newStatus = event.target.value;
-          // copy, don't mutate.
-          const freshCopy = this.state.orderStatus.slice(0)
-          freshCopy[key] = newStatus;
-          this.setState({orderStatus: freshCopy});
+   
+        // consumes a key, and an event object w/ the current input
+        this.updateStatus = (key, {target:{value}}) => {
+          const newOrderStatusArr = this.state.orderStatus.slice(0)
+          newOrderStatusArr[key] = value;
+          this.setState({orderStatus: newOrderStatusArr});
         }
         this.checkVisible = (key) => {
           // returns one of two class names.
@@ -99,7 +109,7 @@ class FieldsContainer extends React.Component {
         /*  consumes an event object w/ the current input.
          *  returns an array of indexes (each index is a match).
          */
-        this.updateVisible = ({ target: {value} }) => {
+        this.updateVisible = ({target:{value}}) => {
           const matchArr = searchObj(value, this.state);
              if (matchArr.length) {
               this.setState({visible: matchArr});
